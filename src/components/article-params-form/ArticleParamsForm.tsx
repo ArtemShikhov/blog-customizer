@@ -5,14 +5,14 @@ import { RadioGroup } from 'src/ui/radio-group/RadioGroup';
 import { Select } from 'src/ui/select/Select';
 import { Separator } from 'src/ui/separator';
 import { Text } from 'src/ui/text';
-import {
-	fontFamilyOptions,
-	fontColors,
-	backgroundColors,
-	contentWidthArr,
+import { 
+	fontFamilyOptions, 
+	fontColors, 
+	backgroundColors, 
+	contentWidthArr, 
 	fontSizeOptions,
 	defaultArticleState,
-	ArticleStateType,
+	ArticleStateType
 } from 'src/constants/articleProps';
 
 import styles from './ArticleParamsForm.module.scss';
@@ -25,11 +25,7 @@ type ArticleParamsFormProps = {
 	onReset: () => void;
 };
 
-export const ArticleParamsForm = ({
-	currentState,
-	onApply,
-	onReset,
-}: ArticleParamsFormProps) => {
+export const ArticleParamsForm = ({ currentState, onApply, onReset }: ArticleParamsFormProps) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [tempData, setTempData] = useState<FormStateType>(currentState);
 	const sidebarRef = useRef<HTMLDivElement>(null);
@@ -42,11 +38,7 @@ export const ArticleParamsForm = ({
 	// Close sidebar when clicking outside
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
-			if (
-				isOpen &&
-				sidebarRef.current &&
-				!sidebarRef.current.contains(event.target as Node)
-			) {
+			if (isOpen && sidebarRef.current && !sidebarRef.current.contains(event.target as Node)) {
 				setIsOpen(false);
 			}
 		};
@@ -62,9 +54,9 @@ export const ArticleParamsForm = ({
 	};
 
 	const handleFormChange = (field: keyof FormStateType, value: any) => {
-		setTempData((prev) => ({
+		setTempData(prev => ({
 			...prev,
-			[field]: value,
+			[field]: value
 		}));
 	};
 
@@ -82,36 +74,34 @@ export const ArticleParamsForm = ({
 	return (
 		<>
 			<ArrowButton isOpen={isOpen} onClick={togglePanel} />
-			<aside
+			<aside 
 				ref={sidebarRef}
-				className={`${styles.container} ${
-					isOpen ? styles.container_open : ''
-				}`}>
+				className={`${styles.container} ${isOpen ? styles.container_open : ''}`}>
 				<form className={styles.form} onSubmit={handleApply}>
 					<Text as='h2' size={22} weight={800} uppercase>
 						ЗАДАЙТЕ ПАРАМЕТРЫ
 					</Text>
-
-					<div style={{ height: '66px' }}></div>
-
-					<Select
+					
+					<div className={styles.spacing66}></div>
+					
+					<RadioGroup
+						name='fontFamily'
 						title='Шрифт'
-						selected={tempData.fontFamilyOption}
 						options={fontFamilyOptions}
+						selected={tempData.fontFamilyOption}
 						onChange={(value) => handleFormChange('fontFamilyOption', value)}
 					/>
 
-					<div style={{ height: '66px' }}></div>
+					<div className={styles.spacing66}></div>
 
-					<RadioGroup
-						name='fontSize'
+					<Select
 						title='Размер шрифта'
-						options={fontSizeOptions}
 						selected={tempData.fontSizeOption}
+						options={fontSizeOptions}
 						onChange={(value) => handleFormChange('fontSizeOption', value)}
 					/>
 
-					<div style={{ height: '66px' }}></div>
+					<div className={styles.spacing66}></div>
 
 					<Select
 						title='Цвет шрифта'
@@ -120,11 +110,11 @@ export const ArticleParamsForm = ({
 						onChange={(value) => handleFormChange('fontColor', value)}
 					/>
 
-					<div style={{ height: '50px' }}></div>
-
+					<div className={styles.spacing50}></div>
+					
 					<Separator />
 
-					<div style={{ height: '66px' }}></div>
+					<div className={styles.spacing66}></div>
 
 					<Select
 						title='Цвет фона'
@@ -133,7 +123,7 @@ export const ArticleParamsForm = ({
 						onChange={(value) => handleFormChange('backgroundColor', value)}
 					/>
 
-					<div style={{ height: '66px' }}></div>
+					<div className={styles.spacing66}></div>
 
 					<Select
 						title='Ширина контента'
@@ -142,15 +132,10 @@ export const ArticleParamsForm = ({
 						onChange={(value) => handleFormChange('contentWidth', value)}
 					/>
 
-					<div style={{ height: '66px' }}></div>
+					<div className={styles.spacing66}></div>
 
 					<div className={styles.bottomContainer}>
-						<Button
-							title='Сбросить'
-							htmlType='button'
-							type='clear'
-							onClick={handleReset}
-						/>
+						<Button title='Сбросить' htmlType='button' type='clear' onClick={handleReset} />
 						<Button title='Применить' htmlType='submit' type='apply' />
 					</div>
 				</form>
