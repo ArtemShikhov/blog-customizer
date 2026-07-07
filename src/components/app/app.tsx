@@ -10,16 +10,6 @@ import styles from './app.module.scss';
 export const App = () => {
 	const [articleState, setArticleState] = useState<ArticleStateType>(defaultArticleState);
 
-	// Apply CSS variables when articleState changes
-	useEffect(() => {
-		const root = document.documentElement;
-		root.style.setProperty('--font-family', articleState.fontFamilyOption.value);
-		root.style.setProperty('--font-size', articleState.fontSizeOption.value);
-		root.style.setProperty('--font-color', articleState.fontColor.value);
-		root.style.setProperty('--container-width', articleState.contentWidth.value);
-		root.style.setProperty('--bg-color', articleState.backgroundColor.value);
-	}, [articleState]);
-
 	// Initialize CSS variables on first render
 	useEffect(() => {
 		const root = document.documentElement;
@@ -29,6 +19,16 @@ export const App = () => {
 		root.style.setProperty('--container-width', defaultArticleState.contentWidth.value);
 		root.style.setProperty('--bg-color', defaultArticleState.backgroundColor.value);
 	}, []);
+
+	// Apply CSS variables when articleState changes
+	useEffect(() => {
+		const root = document.documentElement;
+		root.style.setProperty('--font-family', articleState.fontFamilyOption.value);
+		root.style.setProperty('--font-size', articleState.fontSizeOption.value);
+		root.style.setProperty('--font-color', articleState.fontColor.value);
+		root.style.setProperty('--container-width', articleState.contentWidth.value);
+		root.style.setProperty('--bg-color', articleState.backgroundColor.value);
+	}, [articleState]);
 
 	const handleApply = (newState: ArticleStateType) => {
 		setArticleState(newState);
