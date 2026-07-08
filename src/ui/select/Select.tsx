@@ -90,6 +90,7 @@ export const Select = (props: SelectProps) => {
 									key={option.value}
 									option={option}
 									onClick={() => handleOptionClick(option)}
+									data-testid={`option-${option.value}`}
 								/>
 							))}
 					</ul>

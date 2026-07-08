@@ -26,7 +26,7 @@ export const RadioGroup = (props: RadioGroupProps) => {
 					</Text>
 				</>
 			)}
-			<div className={styles.group}>
+			<div className={styles.group} data-testid="radio-group-container">
 				{options.map((option) => (
 					<Option
 						key={option.value}
@@ -36,6 +36,7 @@ export const RadioGroup = (props: RadioGroupProps) => {
 						selected={selected}
 						onChange={() => handleChange(option)}
 						option={option}
+						data-testid={`radio-option-${option.value}`}
 					/>
 				))}
 			</div>

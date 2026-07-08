@@ -8,17 +8,18 @@ import { defaultArticleState, ArticleStateType } from './../../constants/article
 import styles from './app.module.scss';
 
 export const App = () => {
-	const [articleState, setArticleState] = useState<ArticleStateType>(defaultArticleState);
-
-	// Initialize CSS variables on first render
-	useEffect(() => {
+	const [articleState, setArticleState] = useState<ArticleStateType>(() => {
+		// Initialize CSS variables immediately during state initialization
+		const initialState = defaultArticleState;
 		const root = document.documentElement;
-		root.style.setProperty('--font-family', defaultArticleState.fontFamilyOption.value);
-		root.style.setProperty('--font-size', defaultArticleState.fontSizeOption.value);
-		root.style.setProperty('--font-color', defaultArticleState.fontColor.value);
-		root.style.setProperty('--container-width', defaultArticleState.contentWidth.value);
-		root.style.setProperty('--bg-color', defaultArticleState.backgroundColor.value);
-	}, []);
+		root.style.setProperty('--font-family', initialState.fontFamilyOption.value);
+		root.style.setProperty('--font-size', initialState.fontSizeOption.value);
+		root.style.setProperty('--font-color', initialState.fontColor.value);
+		root.style.setProperty('--container-width', initialState.contentWidth.value);
+		root.style.setProperty('--bg-color', initialState.backgroundColor.value);
+		
+		return initialState;
+	});
 
 	// Apply CSS variables when articleState changes
 	useEffect(() => {
@@ -36,6 +37,13 @@ export const App = () => {
 
 	const handleReset = () => {
 		setArticleState(defaultArticleState);
+		// Re-apply default values to CSS variables
+		const root = document.documentElement;
+		root.style.setProperty('--font-family', defaultArticleState.fontFamilyOption.value);
+		root.style.setProperty('--font-size', defaultArticleState.fontSizeOption.value);
+		root.style.setProperty('--font-color', defaultArticleState.fontColor.value);
+		root.style.setProperty('--container-width', defaultArticleState.contentWidth.value);
+		root.style.setProperty('--bg-color', defaultArticleState.backgroundColor.value);
 	};
 
 	return (

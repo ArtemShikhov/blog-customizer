@@ -90,6 +90,7 @@ export const ArticleParamsForm = ({ currentState, onApply, onReset }: ArticlePar
 						options={fontFamilyOptions}
 						selected={tempData.fontFamilyOption}
 						onChange={(value) => handleFormChange('fontFamilyOption', value)}
+						data-testid="font-family-group"
 					/>
 
 					<div className={styles.spacing66}></div>
@@ -99,6 +100,7 @@ export const ArticleParamsForm = ({ currentState, onApply, onReset }: ArticlePar
 						selected={tempData.fontSizeOption}
 						options={fontSizeOptions}
 						onChange={(value) => handleFormChange('fontSizeOption', value)}
+						data-testid="font-size-select"
 					/>
 
 					<div className={styles.spacing66}></div>
@@ -108,6 +110,7 @@ export const ArticleParamsForm = ({ currentState, onApply, onReset }: ArticlePar
 						selected={tempData.fontColor}
 						options={fontColors}
 						onChange={(value) => handleFormChange('fontColor', value)}
+						data-testid="font-color-select"
 					/>
 
 					<div className={styles.spacing50}></div>
@@ -121,6 +124,7 @@ export const ArticleParamsForm = ({ currentState, onApply, onReset }: ArticlePar
 						selected={tempData.backgroundColor}
 						options={backgroundColors}
 						onChange={(value) => handleFormChange('backgroundColor', value)}
+						data-testid="bg-color-select"
 					/>
 
 					<div className={styles.spacing66}></div>
@@ -130,13 +134,14 @@ export const ArticleParamsForm = ({ currentState, onApply, onReset }: ArticlePar
 						selected={tempData.contentWidth}
 						options={contentWidthArr}
 						onChange={(value) => handleFormChange('contentWidth', value)}
+						data-testid="content-width-select"
 					/>
 
 					<div className={styles.spacing66}></div>
 
 					<div className={styles.bottomContainer}>
-						<Button title='Сбросить' htmlType='button' type='clear' onClick={handleReset} />
-						<Button title='Применить' htmlType='submit' type='apply' />
+						<Button title='Сбросить' htmlType='button' type='clear' onClick={handleReset} data-testid="reset-button" />
+						<Button title='Применить' htmlType='submit' type='apply' data-testid="apply-button" />
 					</div>
 				</form>
 			</aside>
