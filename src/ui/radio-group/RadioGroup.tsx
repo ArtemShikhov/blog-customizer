@@ -26,7 +26,7 @@ export const RadioGroup = (props: RadioGroupProps) => {
 					</Text>
 				</>
 			)}
-			<div className={styles.group} data-testid="radio-group-container">
+			<div className={styles.group} data-testid='radio-group-container'>
 				{options.map((option) => (
 					<Option
 						key={option.value}
