@@ -6,6 +6,7 @@ import { Select } from 'src/ui/select/Select';
 import { Separator } from 'src/ui/separator';
 import { Text } from 'src/ui/text';
 import {
+	defaultArticleState,
 	fontFamilyOptions,
 	fontColors,
 	backgroundColors,
@@ -78,6 +79,9 @@ export const ArticleParamsForm = ({
 	};
 
 	const handleReset = () => {
+		// Reset temp data to default immediately to reflect in the UI
+		setTempData(defaultArticleState);
+		// Then call parent's reset function to update the main state
 		onReset();
 		setIsOpen(false);
 	};
