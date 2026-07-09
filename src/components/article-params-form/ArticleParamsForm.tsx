@@ -12,6 +12,7 @@ import {
 	contentWidthArr,
 	fontSizeOptions,
 	ArticleStateType,
+	OptionType,
 } from 'src/constants/articleProps';
 
 import styles from './ArticleParamsForm.module.scss';
@@ -62,7 +63,7 @@ export const ArticleParamsForm = ({
 
 	const handleFormChange = (
 		field: keyof FormStateType,
-		value: FormStateType[keyof FormStateType]
+		value: string | number | boolean | OptionType
 	) => {
 		setTempData((prev) => ({
 			...prev,
