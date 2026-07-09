@@ -79,10 +79,9 @@ export const ArticleParamsForm = ({
 	};
 
 	const handleReset = () => {
-		// Reset temp data to default immediately to reflect in the UI
-		setTempData(defaultArticleState);
-		// Then call parent's reset function to update the main state
+		// Call parent's reset function first to update the main state
 		onReset();
+		// The tempData will be automatically updated via the useEffect hook that listens to currentState
 		setIsOpen(false);
 	};
 
