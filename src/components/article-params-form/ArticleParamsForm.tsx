@@ -38,7 +38,7 @@ export const ArticleParamsForm = ({
 	// Update temp data when current state changes (e.g., when reset is triggered)
 	useEffect(() => {
 		setTempData(currentState);
-	}, [currentState]);
+	}, []);
 
 	// Close sidebar when clicking outside
 	useEffect(() => {
@@ -79,9 +79,9 @@ export const ArticleParamsForm = ({
 	};
 
 	const handleReset = () => {
-		// Immediately reset temp data to default to reflect in the UI right away
+		// Immediately update tempData to default values to ensure UI reflects the reset instantly
 		setTempData(defaultArticleState);
-		// Then call parent's reset function to update the main state
+		// Then call parent's reset function to update the main application state
 		onReset();
 		setIsOpen(false);
 	};
