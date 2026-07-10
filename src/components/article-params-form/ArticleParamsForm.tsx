@@ -106,7 +106,7 @@ export const ArticleParamsForm = ({
 						selected={tempData.fontFamilyOption}
 						options={fontFamilyOptions}
 						onChange={(value) => handleFormChange('fontFamilyOption', value)}
-						data-testid='font-family-select'
+						data-testid='font-family-group'
 					/>
 
 					<div className={styles.spacing66}></div>
@@ -117,7 +117,7 @@ export const ArticleParamsForm = ({
 						options={fontSizeOptions}
 						selected={tempData.fontSizeOption}
 						onChange={(value) => handleFormChange('fontSizeOption', value)}
-						data-testid='font-size-group'
+						data-testid='font-size-select'
 					/>
 
 					<div className={styles.spacing66}></div>
