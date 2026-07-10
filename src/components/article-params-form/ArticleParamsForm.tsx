@@ -38,7 +38,7 @@ export const ArticleParamsForm = ({
 	// Update temp data when current state changes (e.g., when reset is triggered)
 	useEffect(() => {
 		setTempData(currentState);
-	}, []);
+	}, [currentState]);
 
 	// Close sidebar when clicking outside
 	useEffect(() => {
@@ -101,23 +101,23 @@ export const ArticleParamsForm = ({
 
 					<div className={styles.spacing66}></div>
 
-					<RadioGroup
-						name='fontFamily'
+					<Select
 						title='Шрифт'
-						options={fontFamilyOptions}
 						selected={tempData.fontFamilyOption}
+						options={fontFamilyOptions}
 						onChange={(value) => handleFormChange('fontFamilyOption', value)}
-						data-testid='font-family-group'
+						data-testid='font-family-select'
 					/>
 
 					<div className={styles.spacing66}></div>
 
-					<Select
+					<RadioGroup
+						name='fontSize'
 						title='Размер шрифта'
-						selected={tempData.fontSizeOption}
 						options={fontSizeOptions}
+						selected={tempData.fontSizeOption}
 						onChange={(value) => handleFormChange('fontSizeOption', value)}
-						data-testid='font-size-select'
+						data-testid='font-size-group'
 					/>
 
 					<div className={styles.spacing66}></div>
