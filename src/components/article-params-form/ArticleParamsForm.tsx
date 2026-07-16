@@ -1,4 +1,3 @@
-import { useState, useEffect, useRef } from 'react';
 import { ArrowButton } from 'src/ui/arrow-button';
 import { Button } from 'src/ui/button';
 import { RadioGroup } from 'src/ui/radio-group/RadioGroup';
