@@ -1,4 +1,4 @@
-import { CSSProperties } from 'react';
+import { CSSProperties, useState, useEffect } from 'react';
 import clsx from 'clsx';
 
 import { Article } from '../article/Article';
