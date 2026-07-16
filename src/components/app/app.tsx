@@ -84,7 +84,6 @@ export const App = () => {
 				} as CSSProperties
 			}>
 			<ArticleParamsForm
-				key={JSON.stringify(articleState)}
 				currentState={articleState}
 				onApply={handleApply}
 				onReset={handleReset}
