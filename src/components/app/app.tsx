@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { CSSProperties, useState } from 'react';
 import clsx from 'clsx';
 
 import { Article } from '../article/Article';
@@ -11,40 +11,8 @@ import {
 import styles from './app.module.scss';
 
 export const App = () => {
-	const [articleState, setArticleState] = useState<ArticleStateType>(() => {
-		// Initialize CSS variables immediately during state initialization
-		const initialState = defaultArticleState;
-		const root = document.documentElement;
-		root.style.setProperty(
-			'--font-family',
-			initialState.fontFamilyOption.value
-		);
-		root.style.setProperty('--font-size', initialState.fontSizeOption.value);
-		root.style.setProperty('--font-color', initialState.fontColor.value);
-		root.style.setProperty(
-			'--container-width',
-			initialState.contentWidth.value
-		);
-		root.style.setProperty('--bg-color', initialState.backgroundColor.value);
-
-		return initialState;
-	});
-
-	// Apply CSS variables when articleState changes
-	useEffect(() => {
-		const root = document.documentElement;
-		root.style.setProperty(
-			'--font-family',
-			articleState.fontFamilyOption.value
-		);
-		root.style.setProperty('--font-size', articleState.fontSizeOption.value);
-		root.style.setProperty('--font-color', articleState.fontColor.value);
-		root.style.setProperty(
-			'--container-width',
-			articleState.contentWidth.value
-		);
-		root.style.setProperty('--bg-color', articleState.backgroundColor.value);
-	}, [articleState]);
+	const [articleState, setArticleState] =
+		useState<ArticleStateType>(defaultArticleState);
 
 	const handleApply = (newState: ArticleStateType) => {
 		setArticleState(newState);
@@ -74,7 +42,17 @@ export const App = () => {
 	};
 
 	return (
-		<main className={clsx(styles.main)}>
+		<main
+			className={clsx(styles.main)}
+			style={
+				{
+					'--font-family': articleState.fontFamilyOption.value,
+					'--font-size': articleState.fontSizeOption.value,
+					'--font-color': articleState.fontColor.value,
+					'--container-width': articleState.contentWidth.value,
+					'--bg-color': articleState.backgroundColor.value,
+				} as CSSProperties
+			}>
 			<ArticleParamsForm
 				currentState={articleState}
 				onApply={handleApply}

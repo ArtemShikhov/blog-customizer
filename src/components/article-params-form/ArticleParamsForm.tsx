@@ -6,14 +6,13 @@ import { Select } from 'src/ui/select/Select';
 import { Separator } from 'src/ui/separator';
 import { Text } from 'src/ui/text';
 import {
-	defaultArticleState,
 	fontFamilyOptions,
 	fontColors,
 	backgroundColors,
 	contentWidthArr,
 	fontSizeOptions,
+	defaultArticleState,
 	ArticleStateType,
-	OptionType,
 } from 'src/constants/articleProps';
 
 import styles from './ArticleParamsForm.module.scss';
@@ -33,7 +32,7 @@ export const ArticleParamsForm = ({
 }: ArticleParamsFormProps) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [tempData, setTempData] = useState<FormStateType>(currentState);
-	const sidebarRef = useRef<HTMLDivElement>(null);
+	const sidebarRef = useRef<HTMLElement>(null);
 
 	// Update temp data when current state changes (e.g., when reset is triggered)
 	useEffect(() => {
@@ -42,9 +41,12 @@ export const ArticleParamsForm = ({
 
 	// Close sidebar when clicking outside
 	useEffect(() => {
+		if (!isOpen) {
+			return;
+		}
+
 		const handleClickOutside = (event: MouseEvent) => {
 			if (
-				isOpen &&
 				sidebarRef.current &&
 				!sidebarRef.current.contains(event.target as Node)
 			) {
@@ -62,10 +64,7 @@ export const ArticleParamsForm = ({
 		setIsOpen(!isOpen);
 	};
 
-	const handleFormChange = (
-		field: keyof FormStateType,
-		value: string | number | boolean | OptionType
-	) => {
+	const handleFormChange = (field: keyof FormStateType, value: any) => {
 		setTempData((prev) => ({
 			...prev,
 			[field]: value,
@@ -117,6 +116,7 @@ export const ArticleParamsForm = ({
 						options={fontSizeOptions}
 						selected={tempData.fontSizeOption}
 						onChange={(value) => handleFormChange('fontSizeOption', value)}
+						direction='column'
 						data-testid='font-size-select'
 					/>
 
