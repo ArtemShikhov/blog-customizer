@@ -5,14 +5,13 @@ import { RadioGroup } from 'src/ui/radio-group/RadioGroup';
 import { Select } from 'src/ui/select/Select';
 import { Separator } from 'src/ui/separator';
 import { Text } from 'src/ui/text';
-import { 
-	fontFamilyOptions, 
-	fontColors, 
-	backgroundColors, 
-	contentWidthArr, 
+import {
+	fontFamilyOptions,
+	fontColors,
+	backgroundColors,
+	contentWidthArr,
 	fontSizeOptions,
-	defaultArticleState,
-	ArticleStateType
+	ArticleStateType,
 } from 'src/constants/articleProps';
 
 import styles from './ArticleParamsForm.module.scss';
@@ -25,10 +24,14 @@ type ArticleParamsFormProps = {
 	onReset: () => void;
 };
 
-export const ArticleParamsForm = ({ currentState, onApply, onReset }: ArticleParamsFormProps) => {
+export const ArticleParamsForm = ({
+	currentState,
+	onApply,
+	onReset,
+}: ArticleParamsFormProps) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [tempData, setTempData] = useState<FormStateType>(currentState);
-	const sidebarRef = useRef<HTMLDivElement>(null);
+	const sidebarRef = useRef<HTMLElement>(null);
 
 	// Update temp data when current state changes (e.g., when reset is triggered)
 	useEffect(() => {
@@ -37,8 +40,15 @@ export const ArticleParamsForm = ({ currentState, onApply, onReset }: ArticlePar
 
 	// Close sidebar when clicking outside
 	useEffect(() => {
+		if (!isOpen) {
+			return;
+		}
+
 		const handleClickOutside = (event: MouseEvent) => {
-			if (isOpen && sidebarRef.current && !sidebarRef.current.contains(event.target as Node)) {
+			if (
+				sidebarRef.current &&
+				!sidebarRef.current.contains(event.target as Node)
+			) {
 				setIsOpen(false);
 			}
 		};
@@ -54,9 +64,9 @@ export const ArticleParamsForm = ({ currentState, onApply, onReset }: ArticlePar
 	};
 
 	const handleFormChange = (field: keyof FormStateType, value: any) => {
-		setTempData(prev => ({
+		setTempData((prev) => ({
 			...prev,
-			[field]: value
+			[field]: value,
 		}));
 	};
 
@@ -74,31 +84,34 @@ export const ArticleParamsForm = ({ currentState, onApply, onReset }: ArticlePar
 	return (
 		<>
 			<ArrowButton isOpen={isOpen} onClick={togglePanel} />
-			<aside 
+			<aside
 				ref={sidebarRef}
-				className={`${styles.container} ${isOpen ? styles.container_open : ''}`}>
+				className={`${styles.container} ${
+					isOpen ? styles.container_open : ''
+				}`}>
 				<form className={styles.form} onSubmit={handleApply}>
 					<Text as='h2' size={22} weight={800} uppercase>
 						ЗАДАЙТЕ ПАРАМЕТРЫ
 					</Text>
-					
+
 					<div className={styles.spacing66}></div>
-					
-					<RadioGroup
-						name='fontFamily'
+
+					<Select
 						title='Шрифт'
-						options={fontFamilyOptions}
 						selected={tempData.fontFamilyOption}
+						options={fontFamilyOptions}
 						onChange={(value) => handleFormChange('fontFamilyOption', value)}
 					/>
 
 					<div className={styles.spacing66}></div>
 
-					<Select
+					<RadioGroup
+						name='fontSize'
 						title='Размер шрифта'
-						selected={tempData.fontSizeOption}
 						options={fontSizeOptions}
+						selected={tempData.fontSizeOption}
 						onChange={(value) => handleFormChange('fontSizeOption', value)}
+						direction='column'
 					/>
 
 					<div className={styles.spacing66}></div>
@@ -111,7 +124,7 @@ export const ArticleParamsForm = ({ currentState, onApply, onReset }: ArticlePar
 					/>
 
 					<div className={styles.spacing50}></div>
-					
+
 					<Separator />
 
 					<div className={styles.spacing66}></div>
@@ -135,7 +148,12 @@ export const ArticleParamsForm = ({ currentState, onApply, onReset }: ArticlePar
 					<div className={styles.spacing66}></div>
 
 					<div className={styles.bottomContainer}>
-						<Button title='Сбросить' htmlType='button' type='clear' onClick={handleReset} />
+						<Button
+							title='Сбросить'
+							htmlType='button'
+							type='clear'
+							onClick={handleReset}
+						/>
 						<Button title='Применить' htmlType='submit' type='apply' />
 					</div>
 				</form>
