@@ -10,10 +10,11 @@ type RadioGroupProps = {
 	selected: OptionType;
 	onChange?: (value: OptionType) => void;
 	title: string;
+	direction?: 'row' | 'column';
 };
 
 export const RadioGroup = (props: RadioGroupProps) => {
-	const { name, options, selected, onChange, title } = props;
+	const { name, options, selected, onChange, title, direction = 'row' } = props;
 
 	const handleChange = (option: OptionType) => onChange?.(option);
 
@@ -26,7 +27,11 @@ export const RadioGroup = (props: RadioGroupProps) => {
 					</Text>
 				</>
 			)}
-			<div className={styles.group}>
+			<div
+				className={`${styles.group} ${
+					direction === 'column' ? styles.column : styles.row
+				}`}
+				data-testid='radio-group-container'>
 				{options.map((option) => (
 					<Option
 						key={option.value}
@@ -36,6 +41,7 @@ export const RadioGroup = (props: RadioGroupProps) => {
 						selected={selected}
 						onChange={() => handleChange(option)}
 						option={option}
+						data-testid={`radio-option-${option.value}`}
 					/>
 				))}
 			</div>

@@ -108,13 +108,19 @@ section {
 	display: block;
 }
 
+html {
+	height: 100%;
+}
+
 body {
+	min-height: 100%;
 	margin: 0;
 	padding: 0;
 	font: inherit;
 	font-size: 100%;
 	line-height: 1;
 	vertical-align: baseline;
+	background-color: var(--bg-color, #ffffff);
 	border: 0;
 }
 
