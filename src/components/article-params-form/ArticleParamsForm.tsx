@@ -94,6 +94,7 @@ export const ArticleParamsForm = ({
 			<ArrowButton isOpen={isOpen} onClick={togglePanel} />
 			<aside
 				ref={sidebarRef}
+				data-testid='form-sidebar'
 				className={`${styles.container} ${
 					isOpen ? styles.container_open : ''
 				}`}>
