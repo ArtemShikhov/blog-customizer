@@ -13,6 +13,7 @@ import {
 	fontSizeOptions,
 	defaultArticleState,
 	ArticleStateType,
+	OptionType,
 } from 'src/constants/articleProps';
 
 import styles from './ArticleParamsForm.module.scss';
@@ -64,7 +65,10 @@ export const ArticleParamsForm = ({
 		setIsOpen(!isOpen);
 	};
 
-	const handleFormChange = (field: keyof FormStateType, value: any) => {
+	const handleFormChange = (
+		field: keyof FormStateType,
+		value: string | OptionType
+	) => {
 		setTempData((prev) => ({
 			...prev,
 			[field]: value,
