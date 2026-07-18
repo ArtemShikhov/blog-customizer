@@ -99,9 +99,7 @@ export const ArticleParamsForm = ({
 			<aside
 				ref={sidebarRef}
 				data-testid='form-sidebar'
-				className={`${styles.container} ${
-					isOpen ? styles.container_open : ''
-				}}`}
+				className={`${styles.container} ${isOpen ? styles.container_open : ''}`}
 				hidden={!isOpen}>
 				<form className={styles.form} onSubmit={handleApply}>
 					<Text
