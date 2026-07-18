@@ -73,6 +73,7 @@ export const App = () => {
 
 	return (
 		<main
+			data-testid='app-container'
 			className={clsx(styles.main)}
 			style={
 				{
@@ -88,7 +89,7 @@ export const App = () => {
 				onApply={handleApply}
 				onReset={handleReset}
 			/>
-			<Article />
+			<Article data-testid='article-content' />
 		</main>
 	);
 };
