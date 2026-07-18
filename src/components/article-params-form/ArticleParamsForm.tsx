@@ -69,7 +69,7 @@ export const ArticleParamsForm = ({
 		field: keyof FormStateType,
 		value: string | OptionType
 	) => {
-		setTempData((prev) => ({
+		setTempData((prev: FormStateType) => ({
 			...prev,
 			[field]: value,
 		}));
