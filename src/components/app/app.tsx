@@ -14,66 +14,33 @@ export const App = () => {
 	const [articleState, setArticleState] =
 		useState<ArticleStateType>(defaultArticleState);
 
-	// Initialize CSS variables on mount
+	// Initialize CSS variables on mount and when articleState changes
 	useEffect(() => {
 		const root = document.documentElement;
 		root.style.setProperty(
 			'--font-family',
-			defaultArticleState.fontFamilyOption.value
+			articleState.fontFamilyOption.value
 		);
-		root.style.setProperty(
-			'--font-size',
-			defaultArticleState.fontSizeOption.value
-		);
-		root.style.setProperty('--font-color', defaultArticleState.fontColor.value);
+		root.style.setProperty('--font-size', articleState.fontSizeOption.value);
+		root.style.setProperty('--font-color', articleState.fontColor.value);
 		root.style.setProperty(
 			'--container-width',
-			defaultArticleState.contentWidth.value
+			articleState.contentWidth.value
 		);
-		root.style.setProperty(
-			'--bg-color',
-			defaultArticleState.backgroundColor.value
-		);
-	}, []);
+		root.style.setProperty('--bg-color', articleState.backgroundColor.value);
+	}, [articleState]);
 
 	const handleApply = (newState: ArticleStateType) => {
 		setArticleState(newState);
-
-		// Update CSS variables when state changes
-		const root = document.documentElement;
-		root.style.setProperty('--font-family', newState.fontFamilyOption.value);
-		root.style.setProperty('--font-size', newState.fontSizeOption.value);
-		root.style.setProperty('--font-color', newState.fontColor.value);
-		root.style.setProperty('--container-width', newState.contentWidth.value);
-		root.style.setProperty('--bg-color', newState.backgroundColor.value);
 	};
 
 	const handleReset = () => {
 		setArticleState(defaultArticleState);
-		// Re-apply default values to CSS variables
-		const root = document.documentElement;
-		root.style.setProperty(
-			'--font-family',
-			defaultArticleState.fontFamilyOption.value
-		);
-		root.style.setProperty(
-			'--font-size',
-			defaultArticleState.fontSizeOption.value
-		);
-		root.style.setProperty('--font-color', defaultArticleState.fontColor.value);
-		root.style.setProperty(
-			'--container-width',
-			defaultArticleState.contentWidth.value
-		);
-		root.style.setProperty(
-			'--bg-color',
-			defaultArticleState.backgroundColor.value
-		);
 	};
 
 	return (
 		<main
-			data-testid='app-container'
+			data-testid='app-main-container'
 			className={clsx(styles.main)}
 			style={
 				{
@@ -85,11 +52,12 @@ export const App = () => {
 				} as CSSProperties
 			}>
 			<ArticleParamsForm
+				data-testid='article-params-form'
 				currentState={articleState}
 				onApply={handleApply}
 				onReset={handleReset}
 			/>
-			<Article data-testid='article-content' />
+			<Article data-testid='article-component' />
 		</main>
 	);
 };
