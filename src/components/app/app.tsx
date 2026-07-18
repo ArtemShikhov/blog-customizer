@@ -73,7 +73,6 @@ export const App = () => {
 
 	return (
 		<main
-			data-testid='app-main-container'
 			className={clsx(styles.main)}
 			style={
 				{
@@ -85,12 +84,11 @@ export const App = () => {
 				} as CSSProperties
 			}>
 			<ArticleParamsForm
-				data-testid='article-params-form'
 				currentState={articleState}
 				onApply={handleApply}
 				onReset={handleReset}
 			/>
-			<Article data-testid='article-component' />
+			<Article />
 		</main>
 	);
 };

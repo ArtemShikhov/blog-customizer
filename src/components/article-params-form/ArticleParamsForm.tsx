@@ -11,7 +11,6 @@ import {
 	backgroundColors,
 	contentWidthArr,
 	fontSizeOptions,
-	defaultArticleState,
 	ArticleStateType,
 	OptionType,
 } from 'src/constants/articleProps';
@@ -82,10 +81,9 @@ export const ArticleParamsForm = ({
 	};
 
 	const handleReset = () => {
-		// Immediately update tempData to default values to ensure UI reflects the reset instantly
-		setTempData(defaultArticleState);
-		// Then call parent's reset function to update the main application state
+		// Call parent's reset function first to update the main application state
 		onReset();
+		// The local tempData will be updated via the useEffect that watches currentState
 		setIsOpen(false);
 	};
 
