@@ -91,15 +91,25 @@ export const ArticleParamsForm = ({
 
 	return (
 		<>
-			<ArrowButton isOpen={isOpen} onClick={togglePanel} />
+			<ArrowButton
+				isOpen={isOpen}
+				onClick={togglePanel}
+				data-testid='open-close-form-button'
+			/>
 			<aside
 				ref={sidebarRef}
 				data-testid='form-sidebar'
 				className={`${styles.container} ${
 					isOpen ? styles.container_open : ''
-				}`}>
+				}}`}
+				hidden={!isOpen}>
 				<form className={styles.form} onSubmit={handleApply}>
-					<Text as='h2' size={22} weight={800} uppercase>
+					<Text
+						as='h2'
+						size={22}
+						weight={800}
+						uppercase
+						data-testid='form-title'>
 						ЗАДАЙТЕ ПАРАМЕТРЫ
 					</Text>
 
