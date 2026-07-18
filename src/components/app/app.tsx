@@ -1,4 +1,4 @@
-import { CSSProperties } from 'react';
+import { CSSProperties, useState, useEffect } from 'react';
 import clsx from 'clsx';
 
 import { Article } from '../article/Article';
@@ -84,7 +84,6 @@ export const App = () => {
 				} as CSSProperties
 			}>
 			<ArticleParamsForm
-				key={JSON.stringify(articleState)}
 				currentState={articleState}
 				onApply={handleApply}
 				onReset={handleReset}
