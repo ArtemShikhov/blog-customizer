@@ -83,7 +83,9 @@ export const ArticleParamsForm = ({
 	const handleReset = () => {
 		// Call parent's reset function first to update the main application state
 		onReset();
-		// The local tempData will be updated via the useEffect that watches currentState
+		// Immediately update tempData to current state (which should be default values after reset)
+		// to ensure UI reflects the reset instantly, even if changes weren't applied before
+		setTempData(currentState);
 		setIsOpen(false);
 	};
 
