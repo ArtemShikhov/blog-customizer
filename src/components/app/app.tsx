@@ -1,4 +1,4 @@
-import { CSSProperties, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import clsx from 'clsx';
 
 import { Article } from '../article/Article';
@@ -39,18 +39,7 @@ export const App = () => {
 	};
 
 	return (
-		<main
-			data-testid='app-main-container'
-			className={clsx(styles.main)}
-			style={
-				{
-					'--font-family': articleState.fontFamilyOption.value,
-					'--font-size': articleState.fontSizeOption.value,
-					'--font-color': articleState.fontColor.value,
-					'--container-width': articleState.contentWidth.value,
-					'--bg-color': articleState.backgroundColor.value,
-				} as CSSProperties
-			}>
+		<main data-testid='app-main-container' className={clsx(styles.main)}>
 			<ArticleParamsForm
 				data-testid='article-params-form'
 				currentState={articleState}
