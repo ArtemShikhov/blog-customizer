@@ -86,7 +86,6 @@ export const ArticleParamsForm = ({
 		// Immediately update tempData to current state (which should be default values after reset)
 		// to ensure UI reflects the reset instantly, even if changes weren't applied before
 		setTempData(currentState);
-		setIsOpen(false);
 	};
 
 	return (
