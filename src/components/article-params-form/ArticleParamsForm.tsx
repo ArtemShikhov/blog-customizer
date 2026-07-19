@@ -11,7 +11,6 @@ import {
 	backgroundColors,
 	contentWidthArr,
 	fontSizeOptions,
-	defaultArticleState,
 	ArticleStateType,
 	OptionType,
 } from 'src/constants/articleProps';
@@ -69,7 +68,7 @@ export const ArticleParamsForm = ({
 		field: keyof FormStateType,
 		value: string | OptionType
 	) => {
-		setTempData((prev) => ({
+		setTempData((prev: FormStateType) => ({
 			...prev,
 			[field]: value,
 		}));
@@ -82,24 +81,32 @@ export const ArticleParamsForm = ({
 	};
 
 	const handleReset = () => {
-		// Immediately update tempData to default values to ensure UI reflects the reset instantly
-		setTempData(defaultArticleState);
-		// Then call parent's reset function to update the main application state
+		// Call parent's reset function first to update the main application state
 		onReset();
-		setIsOpen(false);
+		// Immediately update tempData to current state (which should be default values after reset)
+		// to ensure UI reflects the reset instantly, even if changes weren't applied before
+		setTempData(currentState);
 	};
 
 	return (
 		<>
-			<ArrowButton isOpen={isOpen} onClick={togglePanel} />
+			<ArrowButton
+				isOpen={isOpen}
+				onClick={togglePanel}
+				data-testid='open-close-form-button'
+			/>
 			<aside
 				ref={sidebarRef}
 				data-testid='form-sidebar'
-				className={`${styles.container} ${
-					isOpen ? styles.container_open : ''
-				}`}>
+				className={`${styles.container} ${isOpen ? styles.container_open : ''}`}
+				hidden={!isOpen}>
 				<form className={styles.form} onSubmit={handleApply}>
-					<Text as='h2' size={22} weight={800} uppercase>
+					<Text
+						as='h2'
+						size={22}
+						weight={800}
+						uppercase
+						data-testid='form-title'>
 						ЗАДАЙТЕ ПАРАМЕТРЫ
 					</Text>
 
